@@ -27,10 +27,11 @@ public class Tiles {
         tileMap.put("empty", new Tile(0, 0));
         tileMap.put("wall", new Tile(10, 17));
         tileMap.put("floor", new Tile(2, 0));
-        tileMap.put("player", new Tile(27, 0));
+        tileMap.put("player", new Tile(20, 8));
         tileMap.put("skeleton", new Tile(29, 6));
+        tileMap.put("mushroom", new Tile(7, 2));
+        tileMap.put("key", new Tile(18, 23));
     }
-
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
         Tile tile = tileMap.get(d.getTileName());
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
