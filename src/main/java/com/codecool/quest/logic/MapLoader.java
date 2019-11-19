@@ -1,6 +1,9 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.*;
+import com.codecool.quest.logic.items.Door;
+import com.codecool.quest.logic.items.Key;
+import com.codecool.quest.logic.items.Mushroom;
 
 import java.io.InputStream;
 import java.util.Scanner;

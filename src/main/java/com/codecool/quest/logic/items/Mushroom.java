@@ -1,15 +1,15 @@
-package com.codecool.quest.logic.actors;
+package com.codecool.quest.logic.items;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.actors.Actor;
 
-public class Key extends Actor {
-    public Key(Cell cell) {
+public class Mushroom extends Item {
+    public Mushroom(Cell cell) {
         super(cell);
     }
 
     @Override
     public String getTileName() {
-        return "key";
+        return "mushroom";
     }
 }
