@@ -16,7 +16,7 @@ public class Player extends Actor {
         this.inventory.addItem(item);
         this.cell.setItem(null);
     }
-
+   // s
     public String getTileName() {
         return "player";
     }
