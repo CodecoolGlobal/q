@@ -34,7 +34,7 @@ public class Inventory {
         }
     }
 
-    public Map getPlayerInventory() {
+    public Map<String, Integer> getPlayerInventory() {
         return playerInventory;
     }
 }

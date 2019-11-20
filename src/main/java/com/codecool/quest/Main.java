@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -27,7 +28,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-    Label inventoryLabel = new Label();
+    ListView listView = new ListView();
 
     public static void main(String[] args) {
         launch(args);
@@ -35,26 +36,28 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        BorderPane playerData = new BorderPane();
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
 
+
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
-
-        ui.add(new Label("Inventory: "), 0, 1);
-        ui.add(inventoryLabel, 1, 1);
 
 
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
-        borderPane.setRight(ui);
+        playerData.setTop(ui);
+        playerData.setBottom(listView);
+        borderPane.setRight(playerData);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
+
 
         primaryStage.setTitle("Codecool quest");
         primaryStage.show();
@@ -88,6 +91,7 @@ public class Main extends Application {
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
@@ -101,9 +105,10 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
-        inventoryLabel.setText("" + map.getPlayer().getInventory().getPlayerInventory().toString());
+        listView.getItems().add("Inventory: ");
+        for (Map.Entry<String, Integer> entry : map.getPlayer().getInventory().getPlayerInventory().entrySet()) {
+            listView.getItems().add(entry.getKey() + entry.getValue());
+        }
+
     }
-
-
-
 }
