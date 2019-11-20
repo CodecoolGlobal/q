@@ -3,33 +3,38 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.items.Item;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class Inventory {
 
-    private Map<String, Integer> inventory = new LinkedHashMap<String, Integer>();
+    private Map<String, Integer> playerInventory = new LinkedHashMap<String, Integer>();
 
     private boolean isAlreadyInInventory(Item item) {
-        return inventory.containsKey(item.getItemName());
+        return playerInventory.containsKey(item.getItemName());
     }
 
     public void addItem(Item item) {
 
         if (isAlreadyInInventory(item)) {
-            inventory.put(item.getItemName(), inventory.get(item.getItemName()) + 1);
+            playerInventory.put(item.getItemName(), playerInventory.get(item.getItemName()) + 1);
 
         } else {
-            inventory.put(item.getClass().getName(), 1);
+            playerInventory.put(item.getItemName(), 1);
+
+            System.out.println(playerInventory.toString());
 
         }
-        System.out.println("inventory bitch");
-        System.out.println(inventory.toString());
     }
 
     public void useItem(Item item) {
 
         if (isAlreadyInInventory(item)) {
-            inventory.put(item.getItemName(), inventory.get(item.getItemName()) - 1);
+            playerInventory.put(item.getItemName(), playerInventory.get(item.getItemName()) - 1);
         }
+    }
+
+    public Map getPlayerInventory() {
+        return playerInventory;
     }
 }

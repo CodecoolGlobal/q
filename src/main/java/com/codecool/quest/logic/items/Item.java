@@ -13,7 +13,7 @@ public abstract class Item implements Drawable {
     }
 
     public String getItemName() {
-        return this.getClass().getName();
+        return this.getClass().getSimpleName();
     }
 
 }

@@ -52,5 +52,9 @@ public abstract class Actor implements Drawable {
         return this.getClass().getName();
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
 
 }
