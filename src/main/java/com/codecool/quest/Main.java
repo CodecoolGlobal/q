@@ -13,9 +13,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -28,6 +30,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label inventoryLabel = new Label();
     ListView listView = new ListView();
 
     public static void main(String[] args) {
@@ -38,19 +41,24 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         BorderPane playerData = new BorderPane();
         GridPane ui = new GridPane();
+        VBox inventorybox = new VBox();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
 
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
+        inventoryLabel = new Label("Inventory: ");
+        inventorybox.getChildren().add(inventoryLabel);
+        inventorybox.getChildren().add(listView);
 
 
         BorderPane borderPane = new BorderPane();
 
+
         borderPane.setCenter(canvas);
         playerData.setTop(ui);
-        playerData.setBottom(listView);
+        playerData.setBottom(inventorybox);
         borderPane.setRight(playerData);
 
         Scene scene = new Scene(borderPane);
@@ -65,19 +73,19 @@ public class Main extends Application {
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
-            case UP:
+            case W:
                 map.getPlayer().move(0, -1);
                 refresh();
                 break;
-            case DOWN:
+            case S:
                 map.getPlayer().move(0, 1);
                 refresh();
                 break;
-            case LEFT:
+            case A:
                 map.getPlayer().move(-1, 0);
                 refresh();
                 break;
-            case RIGHT:
+            case D:
                 map.getPlayer().move(1, 0);
                 refresh();
                 break;
@@ -105,9 +113,9 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
-        listView.getItems().add("Inventory: ");
+        listView.getItems().clear();
         for (Map.Entry<String, Integer> entry : map.getPlayer().getInventory().getPlayerInventory().entrySet()) {
-            listView.getItems().add(entry.getKey() + entry.getValue());
+            listView.getItems().add(entry.getKey() +" : " + entry.getValue());
         }
 
     }
