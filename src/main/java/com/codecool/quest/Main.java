@@ -7,10 +7,13 @@ import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Inventory;
 import com.codecool.quest.logic.items.Item;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
@@ -49,7 +52,9 @@ public class Main extends Application {
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
         inventoryLabel = new Label("Inventory: ");
+        Button pickUpButton = new Button("Pick up");
         inventorybox.getChildren().add(inventoryLabel);
+        inventorybox.getChildren().add(pickUpButton);
         inventorybox.getChildren().add(listView);
 
 
@@ -65,6 +70,13 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
+        pickUpButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                map.getPlayer().acquireItem(map.getPlayer().getCell().getItem());
+                refresh();
+            }
+        });
 
 
         primaryStage.setTitle("Codecool quest");
@@ -115,7 +127,7 @@ public class Main extends Application {
         healthLabel.setText("" + map.getPlayer().getHealth());
         listView.getItems().clear();
         for (Map.Entry<String, Integer> entry : map.getPlayer().getInventory().getPlayerInventory().entrySet()) {
-            listView.getItems().add(entry.getKey() +" : " + entry.getValue());
+            listView.getItems().add(entry.getKey() + " : " + entry.getValue());
         }
 
     }
