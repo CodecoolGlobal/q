@@ -73,7 +73,7 @@ public class Main extends Application {
         pickUpButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                map.getPlayer().acquireItem(map.getPlayer().getCell().getItem());
+                map.getPlayer().acquireItem(getCurrentItem());
                 refresh();
             }
         });
@@ -102,7 +102,7 @@ public class Main extends Application {
                 refresh();
                 break;
             case P:
-                map.getPlayer().acquireItem(map.getPlayer().getCell().getItem());
+                map.getPlayer().acquireItem(getCurrentItem());
                 refresh();
                 break;
         }
@@ -130,5 +130,9 @@ public class Main extends Application {
             listView.getItems().add(entry.getKey() + " : " + entry.getValue());
         }
 
+    }
+
+    public Item getCurrentItem(){
+        return map.getPlayer().getCell().getItem();
     }
 }
