@@ -21,9 +21,6 @@ public class Inventory {
 
         } else {
             playerInventory.put(item.getItemName(), 1);
-
-            System.out.println(playerInventory.toString());
-
         }
     }
 
