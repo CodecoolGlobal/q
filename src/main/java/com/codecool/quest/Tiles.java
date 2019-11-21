@@ -35,7 +35,9 @@ public class Tiles {
         tileMap.put("openDoor", new Tile(0, 11));
         tileMap.put("skullAndBones", new Tile(0, 15));
         tileMap.put("bullSkull", new Tile(1, 15));
-        tileMap.put("campFire", new Tile(15, 10));
+        tileMap.put("campFire", new Tile(14, 10));
+        tileMap.put("loath", new Tile(6, 2));
+        tileMap.put("hellGate", new Tile(21, 11));
     }
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
         Tile tile = tileMap.get(d.getTileName());

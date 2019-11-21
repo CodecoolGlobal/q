@@ -42,6 +42,12 @@ public class MapLoader {
                         case 'c':
                             cell.setType(CellType.CAMPFIRE);
                             break;
+                        case 'l':
+                            cell.setType(CellType.LOATH);
+                            break;
+                        case 'h':
+                            cell.setType(CellType.HELLGATE);
+                            break;
                         case 's':
                             cell.setType(CellType.FLOOR);
                             new Skeleton(cell);
