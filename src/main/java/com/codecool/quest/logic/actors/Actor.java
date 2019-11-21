@@ -18,8 +18,12 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-
-        if (nextCell.getActor() == null) {
+        if(nextCell.getItem() instanceof  Door && this.gotKey()) {
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
+        }
+        else if (nextCell.getActor() == null && !(nextCell.getItem() instanceof Door)) {
             if (!nextCell.getType().equals(CellType.WALL)) {
                 cell.setActor(null);
                 nextCell.setActor(this);
@@ -54,6 +58,12 @@ public abstract class Actor implements Drawable {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public boolean gotKey(){
+        System.out.println(this.inventory.getPlayerInventory().containsKey("Key"));
+        return this.inventory.getPlayerInventory().containsKey("Key");
+
     }
 
 
