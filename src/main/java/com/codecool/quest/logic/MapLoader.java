@@ -33,6 +33,15 @@ public class MapLoader {
                         case '.':
                             cell.setType(CellType.FLOOR);
                             break;
+                        case 'a':
+                            cell.setType(CellType.SKULLANDBONES);
+                            break;
+                        case 'b':
+                            cell.setType(CellType.BULLSKULL);
+                            break;
+                        case 'c':
+                            cell.setType(CellType.CAMPFIRE);
+                            break;
                         case 's':
                             cell.setType(CellType.FLOOR);
                             new Skeleton(cell);
