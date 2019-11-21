@@ -22,6 +22,7 @@ public abstract class Actor implements Drawable {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
+            ((Door) nextCell.getItem()).setDoorStatus();
         }
         else if (nextCell.getActor() == null && !(nextCell.getItem() instanceof Door)) {
             if (!nextCell.getType().equals(CellType.WALL)) {
@@ -61,7 +62,6 @@ public abstract class Actor implements Drawable {
     }
 
     public boolean gotKey(){
-        System.out.println(this.inventory.getPlayerInventory().containsKey("Key"));
         return this.inventory.getPlayerInventory().containsKey("Key");
 
     }

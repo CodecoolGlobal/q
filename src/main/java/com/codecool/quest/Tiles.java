@@ -31,7 +31,8 @@ public class Tiles {
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("mushroom", new Tile(7, 2));
         tileMap.put("key", new Tile(17, 23));
-        tileMap.put("door", new Tile(0, 10));
+        tileMap.put("closedDoor", new Tile(0, 10));
+        tileMap.put("openDoor", new Tile(0, 11));
     }
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
         Tile tile = tileMap.get(d.getTileName());
