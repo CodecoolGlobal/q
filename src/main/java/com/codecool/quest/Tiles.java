@@ -28,6 +28,7 @@ public class Tiles {
         tileMap.put("wall", new Tile(10, 17));
         tileMap.put("floor", new Tile(2, 0));
         tileMap.put("player", new Tile(20, 8));
+        tileMap.put("playerWithSword", new Tile(18, 3));
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("mushroom", new Tile(7, 2));
         tileMap.put("key", new Tile(17, 23));
@@ -39,6 +40,7 @@ public class Tiles {
         tileMap.put("loath", new Tile(6, 2));
         tileMap.put("hellGate", new Tile(21, 11));
         tileMap.put("grave", new Tile(1, 14));
+        tileMap.put("sword", new Tile(0, 30));
     }
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
         Tile tile = tileMap.get(d.getTileName());

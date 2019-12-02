@@ -12,6 +12,7 @@ import com.codecool.quest.logic.items.Item;
 
 public class Player extends Actor {
     private int enemyHealth = 0;
+    String tileName = "player";
 
     public Player(Cell cell) {
         super(cell);
@@ -19,18 +20,31 @@ public class Player extends Actor {
 
 
     public void acquireItem(Item item) {
+        if(item.getItemName().equals("Sword")){
+            this.setTileName("playerWithSword");
+        }
         this.inventory.addItem(item);
         this.cell.setItem(null);
+
     }
 
     public String getTileName() {
-        return "player";
+        return tileName;
+    }
+
+    public void setTileName(String newTileName) {
+        this.tileName = newTileName;
     }
 
 
     @Override
     public void attack(Actor target, Cell cell) {
-        target.health = target.health - 5;
+        if(inventory.isItemInInventor("Sword")){
+            target.health = target.health - 8;
+        } else {
+            target.health = target.health - 5;
+        }
+
         target.defend(this, cell);
         this.enemyHealth = target.getHealth();
     }

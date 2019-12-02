@@ -4,6 +4,7 @@ import com.codecool.quest.logic.actors.*;
 import com.codecool.quest.logic.items.Door;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Mushroom;
+import com.codecool.quest.logic.items.Sword;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -56,6 +57,11 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Mushroom(cell);
                             break;
+                        case 'w':
+                            cell.setType(CellType.FLOOR);
+                            new Sword(cell);
+                            break;
+
                         case 'k':
                             cell.setType(CellType.FLOOR);
                             new Key(cell);

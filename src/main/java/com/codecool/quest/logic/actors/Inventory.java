@@ -31,6 +31,10 @@ public class Inventory {
         }
     }
 
+    public boolean isItemInInventor(String itemName){
+        return playerInventory.containsKey(itemName);
+    }
+
     public Map<String, Integer> getPlayerInventory() {
         return playerInventory;
     }
