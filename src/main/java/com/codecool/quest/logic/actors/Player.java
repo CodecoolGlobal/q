@@ -29,14 +29,14 @@ public class Player extends Actor {
 
 
     @Override
-    public void attack(Actor target) {
+    public void attack(Actor target, Cell cell) {
         target.health = target.health - 5;
-        target.defend(this);
+        target.defend(this, cell);
         this.enemyHealth = target.getHealth();
     }
 
     @Override
-    public void defend(Actor attacker) {
+    public void defend(Actor attacker,Cell cell) {
     }
 
     public int getEnemyHealth() {
@@ -60,7 +60,7 @@ public class Player extends Actor {
             makeMove(nextCell);
             ((Door) nextCell.getItem()).setDoorStatus();
         } else if ((nextCell.getActor() instanceof Skeleton)) {
-            this.attack(nextCell.getActor());
+            this.attack(nextCell.getActor(), nextCell);
         } else if (nextCell.getActor() == null && !(nextCell.getItem() instanceof Door)) {
             if (!nextCell.getType().equals(CellType.WALL)) {
                 this.setDefaultEnemyHealth(nextCell);

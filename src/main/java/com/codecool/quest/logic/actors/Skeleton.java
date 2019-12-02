@@ -22,16 +22,16 @@ public class Skeleton extends Actor {
 
 
     @Override
-    public void attack(Actor target) {
+    public void attack(Actor target, Cell cell) {
 
     }
 
 
     @Override
-    public void defend(Actor attacker) {
+    public void defend(Actor attacker, Cell cell) {
         if (this.health < 1) {
-            this.setTileName("grave");
             this.health = 0;
+            cell.setActor(null);
         } else {
             attacker.health = attacker.health - 2;
         }

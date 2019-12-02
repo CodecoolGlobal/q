@@ -52,9 +52,11 @@ public abstract class Actor implements Drawable {
         cell = nextCell;
     }
 
-    public abstract void attack(Actor target);
+    public abstract void attack(Actor target, Cell cell);
 
-    public abstract void defend(Actor attacker);
+    public abstract void defend(Actor attacker, Cell cell);
+
+
 
 
 }
