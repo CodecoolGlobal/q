@@ -8,8 +8,8 @@ public enum CellType {
     BULLSKULL("bullSkull"),
     CAMPFIRE("campFire"),
     LOATH("loath"),
-    HELLGATE("hellGate");
-
+    HELLGATE("hellGate"),
+    GRAVE("grave");
     private final String tileName;
 
     CellType(String tileName) {

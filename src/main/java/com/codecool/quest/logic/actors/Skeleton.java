@@ -4,6 +4,8 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.actors.Actor;
 
 public class Skeleton extends Actor {
+    String tileName = "skeleton";
+
     public Skeleton(Cell cell) {
         super(cell);
         this.health = 6;
@@ -11,7 +13,11 @@ public class Skeleton extends Actor {
 
     @Override
     public String getTileName() {
-        return "skeleton";
+        return tileName;
+    }
+
+    public void setTileName(String newTileName) {
+        this.tileName = newTileName;
     }
 
 
@@ -23,6 +29,11 @@ public class Skeleton extends Actor {
 
     @Override
     public void defend(Actor attacker) {
-        attacker.health = attacker.health - 2;
+        if (this.health < 1) {
+            this.setTileName("grave");
+            this.health = 0;
+        } else {
+            attacker.health = attacker.health - 2;
+        }
     }
 }
