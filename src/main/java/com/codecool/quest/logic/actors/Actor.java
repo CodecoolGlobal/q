@@ -8,7 +8,7 @@ import com.codecool.quest.logic.items.Item;
 
 public abstract class Actor implements Drawable {
     protected Cell cell;
-    private int health = 10;
+    protected int health = 10;
     protected Inventory inventory = new Inventory();
 
     public Actor(Cell cell) {
@@ -16,21 +16,6 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-        if(nextCell.getItem() instanceof  Door && this.gotKey()) {
-            makeMove(nextCell);
-            ((Door) nextCell.getItem()).setDoorStatus();
-        }
-        else if (nextCell.getActor() == null && !(nextCell.getItem() instanceof Door)) {
-            if (!nextCell.getType().equals(CellType.WALL)) {
-                makeMove(nextCell);
-                cell = nextCell;
-            }
-        } else if (!(nextCell.getActor() instanceof Skeleton || nextCell.getItem() instanceof Door)) {
-            makeMove(nextCell);
-        }
-    }
 
     public int getHealth() {
         return health;
@@ -56,16 +41,20 @@ public abstract class Actor implements Drawable {
         return inventory;
     }
 
-    public boolean gotKey(){
+    public boolean gotKey() {
         return this.inventory.getPlayerInventory().containsKey("Key");
 
     }
 
-    public void makeMove(Cell nextCell){
+    public void makeMove(Cell nextCell) {
         cell.setActor(null);
         nextCell.setActor(this);
         cell = nextCell;
     }
+
+    public abstract void attack(Actor target);
+
+    public abstract void defend(Actor attacker);
 
 
 }

@@ -5,6 +5,7 @@ import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Inventory;
+import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -33,6 +34,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label enemyHealthLabel = new Label();
     Label inventoryLabel = new Label();
     ListView listView = new ListView();
 
@@ -51,6 +53,8 @@ public class Main extends Application {
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
+        ui.add(new Label("Current enemy Health: "), 0, 1);
+        ui.add(enemyHealthLabel, 1, 1);
         inventoryLabel = new Label("Inventory: ");
         Button pickUpButton = new Button("Pick up");
         inventorybox.getChildren().add(inventoryLabel);
@@ -79,7 +83,7 @@ public class Main extends Application {
         });
 
 
-        primaryStage.setTitle("Codecool quest");
+        primaryStage.setTitle("Hell in a Cell");
         primaryStage.show();
     }
 
@@ -125,6 +129,7 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+        enemyHealthLabel.setText("" + map.getPlayer().getEnemyHealth());
         listView.getItems().clear();
         for (Map.Entry<String, Integer> entry : map.getPlayer().getInventory().getPlayerInventory().entrySet()) {
             listView.getItems().add(entry.getKey() + " : " + entry.getValue());
