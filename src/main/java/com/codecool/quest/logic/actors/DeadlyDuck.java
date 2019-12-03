@@ -36,4 +36,10 @@ public class DeadlyDuck extends Actor {
             attacker.health = attacker.health - 2;
         }
     }
+
+    @Override
+    protected void setDefaultEnemyHealth(Cell nextCell) {
+
+    }
+    public void generateMove(){}
 }

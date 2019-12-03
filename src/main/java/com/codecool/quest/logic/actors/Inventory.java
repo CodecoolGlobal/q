@@ -38,4 +38,6 @@ public class Inventory {
     public Map<String, Integer> getPlayerInventory() {
         return playerInventory;
     }
+
+    public void generateMove(){}
 }

@@ -76,5 +76,8 @@ public abstract class Actor implements Drawable {
         }
     }
 
+    protected abstract void setDefaultEnemyHealth(Cell nextCell);
+    protected abstract void generateMove();
+
 
 }

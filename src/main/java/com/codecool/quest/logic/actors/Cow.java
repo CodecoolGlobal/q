@@ -36,4 +36,7 @@ public class Cow extends Actor {
             attacker.health = attacker.health - 2;
         }
     }
+
+    public void setDefaultEnemyHealth(Cell nextCell){}
+    public void generateMove(){}
 }

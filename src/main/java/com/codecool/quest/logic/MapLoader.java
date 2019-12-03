@@ -7,10 +7,11 @@ import com.codecool.quest.logic.items.Mushroom;
 import com.codecool.quest.logic.items.Sword;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap() {
+    public static GameMap loadMap(List<Actor> enemys) {
         InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
@@ -51,7 +52,8 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+                            Skeleton newSkeleton = new Skeleton(cell);
+                            enemys.add(newSkeleton);
                             break;
                         case 'm':
                             cell.setType(CellType.FLOOR);

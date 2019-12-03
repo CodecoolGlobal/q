@@ -67,5 +67,6 @@ public class Player extends Actor {
 
     }
 
+    public void generateMove(){}
 
 }

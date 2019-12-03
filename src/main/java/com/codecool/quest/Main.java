@@ -4,6 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.actors.EnemyMove;
 import com.codecool.quest.logic.actors.Inventory;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
@@ -25,10 +26,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap();
+    private List<Actor> enemys = new ArrayList<Actor>();
+    GameMap map = MapLoader.loadMap(enemys);
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
@@ -45,10 +50,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-
-        Timer timer = new Timer(true);
-        timer.schedule(new EnemyMove(), 0, 1000);
 
         BorderPane playerData = new BorderPane();
         GridPane ui = new GridPane();
@@ -79,6 +80,8 @@ public class Main extends Application {
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         refresh();
+        Timer timer = new Timer(true);
+        timer.schedule(new EnemyMove(enemys), 0, 5000);
         scene.setOnKeyPressed(this::onKeyPressed);
         pickUpButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
