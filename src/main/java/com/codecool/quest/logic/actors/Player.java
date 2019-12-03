@@ -71,6 +71,9 @@ public class Player extends Actor {
     }
 
     public void generateMove(){
+        if (code == null){
+            return;
+        }
         switch (code) {
             case W:
                 this.move(0, -1);
@@ -88,9 +91,11 @@ public class Player extends Actor {
                 //this.acquireItem(getCurrentItem()); todo
                 break;
         }
+
+        code = null;
     }
 
-    public void setlastKeyPressed(KeyCode code) {
+    public void setLastKeyPressed(KeyCode code) {
         this.code = code;
     }
 }

@@ -5,9 +5,9 @@ import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.EnemyMove;
-import com.codecool.quest.logic.actors.Inventory;
-import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,6 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +81,9 @@ public class Main extends Application {
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
-        Timer timer = new Timer(true);
-        timer.schedule(new EnemyMove(enemys, this::refresh), 0, 5000);
         scene.setOnKeyPressed(this::onKeyPressed);
+        Timeline timeline = setup();
+
         pickUpButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -93,33 +94,33 @@ public class Main extends Application {
 
         primaryStage.setTitle("Hell in a Cell");
         primaryStage.show();
+        timeline.play();
+    }
+
+    public Timeline setup() {
+        Timeline timer = new Timeline();
+        double frameTime = 0.017;
+
+        timer.setCycleCount( Timeline.INDEFINITE );
+
+        KeyFrame kf = new KeyFrame(
+                Duration.seconds(frameTime),
+                ae -> stepGame());
+
+        timer.getKeyFrames().add( kf );
+
+        return timer;
+    }
+
+    private void stepGame() {
+        enemys.forEach(Actor::generateMove);
+        map.getPlayer().generateMove();
+        refresh();
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        KeyCode code = keyEvent.getCode();
-        map.getPlayer().setlastKeyPressed(code);
-        switch (code) {
-            case W:
-                map.getPlayer().move(0, -1);
-                refresh();
-                break;
-            case S:
-                map.getPlayer().move(0, 1);
-                refresh();
-                break;
-            case A:
-                map.getPlayer().move(-1, 0);
-                refresh();
-                break;
-            case D:
-                map.getPlayer().move(1, 0);
-                refresh();
-                break;
-            case P:
-                map.getPlayer().acquireItem(getCurrentItem());
-                refresh();
-                break;
-        }
+        KeyCode keyCode = keyEvent.getCode();
+        map.getPlayer().setLastKeyPressed(keyCode);
     }
 
     public void refresh() {

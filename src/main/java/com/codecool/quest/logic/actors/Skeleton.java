@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class Skeleton extends Actor {
     String tileName = "skeleton";
+    private int turnsToMove = 60;
 
     public Skeleton(Cell cell) {
         super(cell);
@@ -42,6 +43,11 @@ public class Skeleton extends Actor {
     public void setDefaultEnemyHealth(Cell nextCell){}
 
     public void generateMove(){
+        if (turnsToMove>0) {
+            turnsToMove -= 1;
+            return;
+        }
+        turnsToMove = 60;
         Random random = new Random();
         int axleXY = random.nextInt(1);
         int direction = random.nextInt(1);
