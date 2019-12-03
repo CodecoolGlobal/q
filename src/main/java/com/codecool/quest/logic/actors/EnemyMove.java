@@ -1,5 +1,7 @@
 package com.codecool.quest.logic.actors;
 
+import com.codecool.quest.Main;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
@@ -7,9 +9,9 @@ import java.util.function.Function;
 
 public class EnemyMove extends TimerTask {
     private List<Actor> enemys;
+
     public EnemyMove(List<Actor> enemys) {
         this.enemys = enemys;
-
 
     }
 

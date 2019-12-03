@@ -47,9 +47,9 @@ public class Skeleton extends Actor {
         int direction = random.nextInt(1);
         direction = (direction == 0) ? -1 : 1;
         if (axleXY == 0){
-            this.move(cell.getX()+direction,cell.getY());
+            this.move(this.cell.getX()+direction,this.cell.getY());
         } else {
-            this.move(cell.getX(),cell.getY()+direction);
+            this.move(this.cell.getX(),this.cell.getY()+direction);
         }
     }
 }

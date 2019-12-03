@@ -42,6 +42,7 @@ public class Main extends Application {
     Label enemyHealthLabel = new Label();
     Label inventoryLabel = new Label();
     ListView listView = new ListView();
+    final long timeInterval = 2000;
 
 
     public static void main(String[] args) {
@@ -79,9 +80,8 @@ public class Main extends Application {
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
-        refresh();
         Timer timer = new Timer(true);
-        timer.schedule(new EnemyMove(enemys), 0, 5000);
+        timer.schedule(new EnemyMove(enemys, this::refresh), 0, 5000);
         scene.setOnKeyPressed(this::onKeyPressed);
         pickUpButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -96,7 +96,9 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
+        KeyCode code = keyEvent.getCode();
+        map.getPlayer().setlastKeyPressed(code);
+        switch (code) {
             case W:
                 map.getPlayer().move(0, -1);
                 refresh();
@@ -120,7 +122,7 @@ public class Main extends Application {
         }
     }
 
-    private void refresh() {
+    public void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -145,7 +147,7 @@ public class Main extends Application {
 
     }
 
-    public Item getCurrentItem(){
+    public Item getCurrentItem() {
         return map.getPlayer().getCell().getItem();
     }
 }
