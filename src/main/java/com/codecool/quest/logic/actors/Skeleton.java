@@ -49,12 +49,11 @@ public class Skeleton extends Actor {
             return;
         }
         turnsToMove = 60;
+
         int axleXY = RANDOM_DIRECTION.nextInt(2);
         int direction = RANDOM_DIRECTION.nextInt(2);
-        direction = (direction == 0) ? -1 : 1;
 
-        System.out.println(this.cell.getX());
-        System.out.println(this.cell.getY());
+        direction = (direction == 0) ? -1 : 1;
 
         if (axleXY == 0){
             this.move(direction,0);
