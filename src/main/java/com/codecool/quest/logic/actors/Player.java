@@ -67,23 +67,5 @@ public class Player extends Actor {
 
     }
 
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-        if (nextCell.getItem() instanceof Door && this.gotKey()) {
-            this.setDefaultEnemyHealth(nextCell);
-            makeMove(nextCell);
-            ((Door) nextCell.getItem()).setDoorStatus();
-        } else if ((nextCell.getActor() instanceof Skeleton)) {
-            this.attack(nextCell.getActor(), nextCell);
-        } else if (nextCell.getActor() == null && !(nextCell.getItem() instanceof Door)) {
-            if (!nextCell.getType().equals(CellType.WALL)) {
-                this.setDefaultEnemyHealth(nextCell);
-                makeMove(nextCell);
-                cell = nextCell;
-            }
-        } else if (!(nextCell.getActor() instanceof Skeleton || nextCell.getItem() instanceof Door)) {
-            this.setDefaultEnemyHealth(nextCell);
-            makeMove(nextCell);
-        }
-    }
+
 }

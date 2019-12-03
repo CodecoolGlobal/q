@@ -3,12 +3,12 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.actors.Actor;
 
-public class Skeleton extends Actor {
-    String tileName = "skeleton";
+public class Cow extends Actor {
+    String tileName = "cow";
 
-    public Skeleton(Cell cell) {
+    public Cow(Cell cell) {
         super(cell);
-        this.health = 6;
+        this.health = 13;
     }
 
     @Override
@@ -36,6 +36,4 @@ public class Skeleton extends Actor {
             attacker.health = attacker.health - 2;
         }
     }
-
-
 }

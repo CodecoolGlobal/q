@@ -38,12 +38,18 @@ public class Main extends Application {
     Label inventoryLabel = new Label();
     ListView listView = new ListView();
 
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
+        Timer timer = new Timer(true);
+        timer.schedule(new EnemyMove(), 0, 1000);
+
         BorderPane playerData = new BorderPane();
         GridPane ui = new GridPane();
         VBox inventorybox = new VBox();
@@ -81,7 +87,6 @@ public class Main extends Application {
                 refresh();
             }
         });
-
 
         primaryStage.setTitle("Hell in a Cell");
         primaryStage.show();
