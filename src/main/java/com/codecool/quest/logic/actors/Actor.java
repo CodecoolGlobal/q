@@ -58,25 +58,53 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (nextCell.getItem() instanceof Door && this.gotKey()) {
+
+        if (canOpenDoor(nextCell)) {
+
             this.setDefaultEnemyHealth(nextCell);
             makeMove(nextCell);
             ((Door) nextCell.getItem()).setDoorStatus();
-        } else if ((nextCell.getActor() instanceof Skeleton)) {
+
+        } else if (isSkeleton(nextCell)) {
             this.attack(nextCell.getActor(), nextCell);
-        } else if (nextCell.getActor() == null && !(nextCell.getItem() instanceof Door)) {
-            if (!nextCell.getType().equals(CellType.WALL)) {
+
+        } else if (emptyCell(nextCell)) {
+            if (isWall(nextCell)) {
+
                 this.setDefaultEnemyHealth(nextCell);
                 makeMove(nextCell);
                 cell = nextCell;
             }
-        } else if (!(nextCell.getActor() instanceof Skeleton || nextCell.getItem() instanceof Door)) {
+
+        } else if (notEnemyOrDoor(nextCell)) {
+
             this.setDefaultEnemyHealth(nextCell);
             makeMove(nextCell);
         }
     }
 
+    private boolean canOpenDoor(Cell nextCell) {
+        return nextCell.getItem() instanceof Door && this.gotKey();
+    }
+
+    private boolean isSkeleton(Cell nextCell) {
+        return (nextCell.getActor() instanceof Skeleton);
+    }
+
+    private boolean emptyCell(Cell nextCell) {
+        return nextCell.getActor() == null && !(nextCell.getItem() instanceof Door);
+    }
+
+    private boolean isWall(Cell nextCell) {
+        return !nextCell.getType().equals(CellType.WALL);
+    }
+
+    private boolean notEnemyOrDoor(Cell nextCell) {
+        return !(nextCell.getActor() instanceof Skeleton || nextCell.getItem() instanceof Door);
+    }
+
     protected abstract void setDefaultEnemyHealth(Cell nextCell);
+
     public abstract void generateMove();
 
 
