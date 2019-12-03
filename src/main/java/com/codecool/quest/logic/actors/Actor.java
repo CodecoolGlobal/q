@@ -4,7 +4,6 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.items.Door;
-import com.codecool.quest.logic.items.Item;
 
 public abstract class Actor implements Drawable {
     protected Cell cell;
@@ -69,7 +68,7 @@ public abstract class Actor implements Drawable {
             this.attack(nextCell.getActor(), nextCell);
 
         } else if (emptyCell(nextCell)) {
-            if (isWall(nextCell)) {
+            if (notWall(nextCell)) {
 
                 this.setDefaultEnemyHealth(nextCell);
                 makeMove(nextCell);
@@ -95,7 +94,7 @@ public abstract class Actor implements Drawable {
         return nextCell.getActor() == null && !(nextCell.getItem() instanceof Door);
     }
 
-    private boolean isWall(Cell nextCell) {
+    private boolean notWall(Cell nextCell) {
         return !nextCell.getType().equals(CellType.WALL);
     }
 

@@ -97,7 +97,7 @@ public class Main extends Application {
         timeline.play();
     }
 
-    public Timeline setup() {
+    private Timeline setup() {
         Timeline timer = new Timeline();
         double frameTime = 0.017;
 

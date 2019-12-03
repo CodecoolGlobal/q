@@ -9,6 +9,7 @@ import java.util.Random;
 public class Skeleton extends Actor {
     String tileName = "skeleton";
     private int turnsToMove = 60;
+    public static final Random RANDOM_DIRECTION = new Random();
 
     public Skeleton(Cell cell) {
         super(cell);
@@ -48,14 +49,17 @@ public class Skeleton extends Actor {
             return;
         }
         turnsToMove = 60;
-        Random random = new Random();
-        int axleXY = random.nextInt(1);
-        int direction = random.nextInt(1);
+        int axleXY = RANDOM_DIRECTION.nextInt(2);
+        int direction = RANDOM_DIRECTION.nextInt(2);
         direction = (direction == 0) ? -1 : 1;
+
+        System.out.println(this.cell.getX());
+        System.out.println(this.cell.getY());
+
         if (axleXY == 0){
-            this.move(this.cell.getX()+direction,this.cell.getY());
+            this.move(direction,0);
         } else {
-            this.move(this.cell.getX(),this.cell.getY()+direction);
+            this.move(0,direction);
         }
     }
 }
