@@ -54,6 +54,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Skeleton(cell);
                             break;
+                        case 'u':
+                            cell.setType(CellType.FLOOR);
+                            new DeadlyDuck(cell);
+                            break;
                         case 'm':
                             cell.setType(CellType.FLOOR);
                             new Mushroom(cell);
@@ -62,7 +66,6 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Sword(cell);
                             break;
-
                         case 'k':
                             cell.setType(CellType.FLOOR);
                             new Key(cell);

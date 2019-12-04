@@ -13,9 +13,9 @@ abcl#..#cablbbclaab#..#bc
 cbab#..#cbaaalbaac##..##l
 al###..####bcaacb#......#
 cb#..@.w..#cllcaa#......#
-ll#.......#abbbac#......#
-bc#.......#blclab#......#
-al#...w...#abclab#......#
-bc#.......#ccllac#......#
-ll#.......#babbal#......#
+ll#.u.....#abbbac#......#
+bc#....u..#blclab#......#
+al#.u.w...#abclab#......#
+bc#.u.u.u.#ccllac#......#
+ll#.u...u.#babbal#......#
 la#########bacalab###h##l

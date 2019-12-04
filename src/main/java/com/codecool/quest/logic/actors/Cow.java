@@ -10,7 +10,7 @@ public class Cow extends Enemy {
         this.health = 13;
     }
 
-    @Override
+
     public String getTileName() {
         return tileName;
     }
@@ -20,13 +20,6 @@ public class Cow extends Enemy {
     }
 
 
-    @Override
-    public void attack(Actor target, Cell cell) {
-
-    }
-
-
-    @Override
     public void defend(Actor attacker, Cell cell) {
         if (this.health < 1) {
             this.health = 0;
@@ -35,12 +28,14 @@ public class Cow extends Enemy {
             attacker.health = attacker.health - 2;
         }
     }
+
     public void move(int dx, int dy) {
     }
 
-    public void setDefaultEnemyHealth(Cell nextCell){}
+    public void setDefaultEnemyHealth(Cell nextCell) {
+    }
 
-    @Override
+
     protected int setDefaultTurnsToMove() {
         return 0;
     }

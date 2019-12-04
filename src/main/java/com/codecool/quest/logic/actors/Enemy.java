@@ -22,15 +22,6 @@ public abstract class Enemy extends Actor {
         return enemies;
     }
 
-
-    public abstract void attack(Actor target, Cell cell);
-
-    public abstract void defend(Actor attacker, Cell cell);
-
-    public boolean isEnemyDead() {
-        return this.health < 1;
-    }
-
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
 
@@ -50,6 +41,10 @@ public abstract class Enemy extends Actor {
             this.setDefaultEnemyHealth(nextCell);
             makeMove(nextCell);
         }
+    }
+
+    public boolean isEnemyDead() {
+        return this.health < 1;
     }
 
     @Override
@@ -74,6 +69,22 @@ public abstract class Enemy extends Actor {
         } else {
             this.move(0, newStepSize);
         };
+    }
+
+    public void attack(Actor target, Cell cell) {
+        if (target instanceof Player) {
+            target.health = target.health - this.damage;
+        }
+    }
+
+    public void defend(Actor attacker, Cell cell) {
+        if (this.isEnemyDead()) {
+            this.health = 0;
+            cell.setActor(null);
+            enemies.remove(this);
+        } else {
+            attacker.health = attacker.health - this.defenseDamage;
+        }
     }
 
     protected abstract int setDefaultTurnsToMove();

@@ -66,7 +66,7 @@ public class Player extends Actor {
                 cell = nextCell;
             }
 
-        } else if (!(isEnemy(nextCell)) || notDoor(nextCell)) {
+        } else if (!(isEnemy(nextCell)) && notDoor(nextCell)) {
 
             this.setDefaultEnemyHealth(nextCell);
             makeMove(nextCell);

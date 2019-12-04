@@ -12,7 +12,7 @@ public class Skeleton extends Enemy {
     public Skeleton(Cell cell) {
         super(cell);
         this.health = 6;
-        this.turnsToMove = 60;
+        this.turnsToMove = DEFAULT_TURNS_TO_MOVE;
         this.maxDistance = 2;
         this.damage = 3;
         this.defenseDamage = 2;
@@ -25,22 +25,6 @@ public class Skeleton extends Enemy {
 
     public void setTileName(String newTileName) {
         this.tileName = newTileName;
-    }
-
-    public void attack(Actor target, Cell cell) {
-        if (target instanceof Player) {
-            target.health = target.health - damage;
-        }
-    }
-
-    public void defend(Actor attacker, Cell cell) {
-        if (this.isEnemyDead()) {
-            this.health = 0;
-            cell.setActor(null);
-            enemies.remove(this);
-        } else {
-            attacker.health = attacker.health - defenseDamage;
-        }
     }
 
     public void setDefaultEnemyHealth(Cell nextCell){}
