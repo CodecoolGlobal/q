@@ -1,14 +1,15 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.actors.Actor;
 
-public class DeadlyDuck extends Actor {
+public class DeadlyDuck extends Enemy {
     String tileName = "deadlyDuck";
+    private static final int DEFAULT_TURNS_TO_MOVE = 180;
 
     public DeadlyDuck(Cell cell) {
         super(cell);
         this.health = 9;
+        this.turnsToMove = 180;
     }
 
     @Override
@@ -37,9 +38,16 @@ public class DeadlyDuck extends Actor {
         }
     }
 
+    public void move(int dx, int dy) {
+    }
+
     @Override
     protected void setDefaultEnemyHealth(Cell nextCell) {
 
     }
-    public void generateMove(){}
+
+    @Override
+    protected int setDefaultTurnsToMove() {
+        return DEFAULT_TURNS_TO_MOVE;
+    }
 }

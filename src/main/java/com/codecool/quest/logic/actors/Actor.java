@@ -9,6 +9,7 @@ public abstract class Actor implements Drawable {
     protected Cell cell;
     protected int health = 10;
     protected Inventory inventory = new Inventory();
+    protected int maxDistance;
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -55,51 +56,30 @@ public abstract class Actor implements Drawable {
 
     public abstract void defend(Actor attacker, Cell cell);
 
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
+    public abstract void move(int dx, int dy);
 
-        if (canOpenDoor(nextCell)) {
-
-            this.setDefaultEnemyHealth(nextCell);
-            makeMove(nextCell);
-            ((Door) nextCell.getItem()).setDoorStatus();
-
-        } else if (isSkeleton(nextCell)) {
-            this.attack(nextCell.getActor(), nextCell);
-
-        } else if (emptyCell(nextCell)) {
-            if (notWall(nextCell)) {
-
-                this.setDefaultEnemyHealth(nextCell);
-                makeMove(nextCell);
-                cell = nextCell;
-            }
-
-        } else if (notEnemyOrDoor(nextCell)) {
-
-            this.setDefaultEnemyHealth(nextCell);
-            makeMove(nextCell);
-        }
-    }
-
-    private boolean canOpenDoor(Cell nextCell) {
+    protected boolean canOpenDoor(Cell nextCell) {
         return nextCell.getItem() instanceof Door && this.gotKey();
     }
 
-    private boolean isSkeleton(Cell nextCell) {
-        return (nextCell.getActor() instanceof Skeleton);
+    protected boolean isEnemy(Cell nextCell) {
+        return (nextCell.getActor() instanceof Enemy);
     }
 
-    private boolean emptyCell(Cell nextCell) {
+    protected boolean isPlayer(Cell nextCell) {
+        return (nextCell.getActor() instanceof Player);
+    }
+
+    protected boolean emptyCell(Cell nextCell) {
         return nextCell.getActor() == null && !(nextCell.getItem() instanceof Door);
     }
 
-    private boolean notWall(Cell nextCell) {
+    protected boolean notWall(Cell nextCell) {
         return !nextCell.getType().equals(CellType.WALL);
     }
 
-    private boolean notEnemyOrDoor(Cell nextCell) {
-        return !(nextCell.getActor() instanceof Skeleton || nextCell.getItem() instanceof Door);
+    protected boolean notDoor(Cell nextCell) {
+        return !(nextCell.getItem() instanceof Door);
     }
 
     protected abstract void setDefaultEnemyHealth(Cell nextCell);

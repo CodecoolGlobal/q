@@ -1,11 +1,6 @@
 package com.codecool.quest.logic.actors;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.items.Door;
 import com.codecool.quest.logic.items.Item;
 import javafx.scene.input.KeyCode;
@@ -13,14 +8,14 @@ import javafx.scene.input.KeyCode;
 
 public class Player extends Actor {
     private int enemyHealth = 0;
-    String tileName = "player";
-    private KeyCode code;
+    private String tileName = "player";
+    private KeyCode keyCode;
 
 
     public Player(Cell cell) {
         super(cell);
+        this.maxDistance = 1;
     }
-
 
     public void acquireItem(Item item) {
         if(item.getItemName().equals("Sword")){
@@ -35,14 +30,14 @@ public class Player extends Actor {
         return tileName;
     }
 
-    public void setTileName(String newTileName) {
+    private void setTileName(String newTileName) {
         this.tileName = newTileName;
     }
 
 
     @Override
     public void attack(Actor target, Cell cell) {
-        if(inventory.isItemInInventor("Sword")){
+        if(inventory.isItemInInventory("Sword")){
             target.health = target.health - 8;
         } else {
             target.health = target.health - 5;
@@ -56,6 +51,33 @@ public class Player extends Actor {
     public void defend(Actor attacker,Cell cell) {
     }
 
+    public void move(int dx, int dy) {
+        Cell nextCell = cell.getNeighbor(dx, dy);
+
+        if (canOpenDoor(nextCell)) {
+
+            this.setDefaultEnemyHealth(nextCell);
+            makeMove(nextCell);
+            ((Door) nextCell.getItem()).setDoorStatus();
+
+        } else if (isEnemy(nextCell)) {
+            this.attack(nextCell.getActor(), nextCell);
+
+        } else if (emptyCell(nextCell)) {
+            if (notWall(nextCell)) {
+
+                this.setDefaultEnemyHealth(nextCell);
+                makeMove(nextCell);
+                cell = nextCell;
+            }
+
+        } else if (!(isEnemy(nextCell)) || notDoor(nextCell)) {
+
+            this.setDefaultEnemyHealth(nextCell);
+            makeMove(nextCell);
+        }
+    }
+
     public int getEnemyHealth() {
         return this.enemyHealth;
     }
@@ -66,36 +88,33 @@ public class Player extends Actor {
         } else {
             this.enemyHealth = 0;
         }
-
-
     }
 
     public void generateMove(){
-        if (code == null){
+        if (keyCode == null){
             return;
         }
-        switch (code) {
+        switch (keyCode) {
             case W:
-                this.move(0, -1);
+                this.move(0, -maxDistance);
                 break;
             case S:
-                this.move(0, 1);
+                this.move(0, maxDistance);
                 break;
             case A:
-                this.move(-1, 0);
+                this.move(-maxDistance, 0);
                 break;
             case D:
-                this.move(1, 0);
+                this.move(maxDistance, 0);
                 break;
             case P:
                 //this.acquireItem(getCurrentItem()); todo
                 break;
         }
-
-        code = null;
+        keyCode = null;
     }
 
     public void setLastKeyPressed(KeyCode code) {
-        this.code = code;
+        this.keyCode = code;
     }
 }

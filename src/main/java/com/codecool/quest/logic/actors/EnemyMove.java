@@ -1,24 +1,20 @@
 package com.codecool.quest.logic.actors;
 
-import com.codecool.quest.Main;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
-import java.util.function.Function;
 
 public class EnemyMove extends TimerTask {
 
     private final Runnable refresh;
-    private List<Actor> enemys;
-    public EnemyMove(List<Actor> enemys, Runnable refresh) {
-        this.enemys = enemys;
+    private List<Actor> enemies;
+    public EnemyMove(List<Actor> enemies, Runnable refresh) {
+        this.enemies = enemies;
         this.refresh = refresh;
 
     }
 
     public void run() {
-        for (Actor enemy : enemys){
+        for (Actor enemy : enemies){
             enemy.generateMove();
         }
         refresh.run();

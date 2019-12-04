@@ -1,19 +1,19 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.actors.Actor;
 
-import java.util.List;
 import java.util.Random;
 
-public class Skeleton extends Actor {
+public class Skeleton extends Enemy {
     String tileName = "skeleton";
-    private int turnsToMove = 60;
-    public static final Random RANDOM_DIRECTION = new Random();
+    private static final Random RANDOM_DIRECTION = new Random();
+    private static final int DEFAULT_TURNS_TO_MOVE = 60;
 
     public Skeleton(Cell cell) {
         super(cell);
         this.health = 6;
+        this.turnsToMove = 60;
+        this.maxDistance = 2;
     }
 
     @Override
@@ -25,12 +25,12 @@ public class Skeleton extends Actor {
         this.tileName = newTileName;
     }
 
-
     @Override
     public void attack(Actor target, Cell cell) {
-
+        if (target instanceof Player) {
+            target.health = target.health - 3;
+        }
     }
-
 
     @Override
     public void defend(Actor attacker, Cell cell) {
@@ -41,24 +41,12 @@ public class Skeleton extends Actor {
             attacker.health = attacker.health - 2;
         }
     }
+
     public void setDefaultEnemyHealth(Cell nextCell){}
 
-    public void generateMove(){
-        if (turnsToMove>0) {
-            turnsToMove -= 1;
-            return;
-        }
-        turnsToMove = 60;
-
-        int axleXY = RANDOM_DIRECTION.nextInt(2);
-        int direction = RANDOM_DIRECTION.nextInt(2);
-
-        direction = (direction == 0) ? -1 : 1;
-
-        if (axleXY == 0){
-            this.move(direction,0);
-        } else {
-            this.move(0,direction);
-        }
+    protected int setDefaultTurnsToMove() {
+        return DEFAULT_TURNS_TO_MOVE;
     }
+
+
 }

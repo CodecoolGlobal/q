@@ -4,7 +4,6 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.actors.EnemyMove;
 import com.codecool.quest.logic.items.Item;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -30,11 +29,10 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 
 public class Main extends Application {
-    private List<Actor> enemys = new ArrayList<Actor>();
-    GameMap map = MapLoader.loadMap(enemys);
+    private List<Actor> enemies = new ArrayList<Actor>();
+    GameMap map = MapLoader.loadMap(enemies);
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
@@ -113,7 +111,7 @@ public class Main extends Application {
     }
 
     private void stepGame() {
-        enemys.forEach(Actor::generateMove);
+        enemies.forEach(actor -> actor.generateMove());
         map.getPlayer().generateMove();
         refresh();
     }
@@ -123,7 +121,7 @@ public class Main extends Application {
         map.getPlayer().setLastKeyPressed(keyCode);
     }
 
-    public void refresh() {
+    private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 

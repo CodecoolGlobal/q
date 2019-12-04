@@ -1,9 +1,8 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.actors.Actor;
 
-public class Cow extends Actor {
+public class Cow extends Enemy {
     String tileName = "cow";
 
     public Cow(Cell cell) {
@@ -36,7 +35,14 @@ public class Cow extends Actor {
             attacker.health = attacker.health - 2;
         }
     }
+    public void move(int dx, int dy) {
+    }
 
     public void setDefaultEnemyHealth(Cell nextCell){}
-    public void generateMove(){}
+
+    @Override
+    protected int setDefaultTurnsToMove() {
+        return 0;
+    }
+
 }

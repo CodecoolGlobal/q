@@ -31,7 +31,7 @@ public class Inventory {
         }
     }
 
-    public boolean isItemInInventor(String itemName){
+    public boolean isItemInInventory(String itemName){
         return playerInventory.containsKey(itemName);
     }
 
