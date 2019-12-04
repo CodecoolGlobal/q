@@ -4,10 +4,17 @@ import com.codecool.quest.logic.Cell;
 
 public class Cow extends Enemy {
     String tileName = "cow";
+    private static final int DEFAULT_TURNS_TO_MOVE = 60;
+
 
     public Cow(Cell cell) {
         super(cell);
-        this.health = 13;
+        this.health = 15;
+        this.turnsToMove = DEFAULT_TURNS_TO_MOVE;
+        this.maxDistance = 0;
+        this.damage = 8;
+        this.defenseDamage = 5;
+
     }
 
 
@@ -15,29 +22,19 @@ public class Cow extends Enemy {
         return tileName;
     }
 
+
     public void setTileName(String newTileName) {
         this.tileName = newTileName;
     }
 
 
-    public void defend(Actor attacker, Cell cell) {
-        if (this.health < 1) {
-            this.health = 0;
-            cell.setActor(null);
-        } else {
-            attacker.health = attacker.health - 2;
-        }
-    }
-
     public void move(int dx, int dy) {
     }
 
-    public void setDefaultEnemyHealth(Cell nextCell) {
+
+    protected int getDefaultTurnsToMove() {
+        return DEFAULT_TURNS_TO_MOVE;
     }
 
-
-    protected int setDefaultTurnsToMove() {
-        return 0;
-    }
 
 }

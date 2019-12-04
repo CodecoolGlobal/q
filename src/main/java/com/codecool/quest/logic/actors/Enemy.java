@@ -57,7 +57,7 @@ public abstract class Enemy extends Actor {
             turnsToMove -= 1;
             return;
         }
-        turnsToMove = setDefaultTurnsToMove();
+        turnsToMove = getDefaultTurnsToMove();
 
         int stepDirection = RANDOM_DIRECTION.nextInt(2);
         int stepSize = RANDOM_DIRECTION.nextInt(maxDistance);
@@ -87,7 +87,7 @@ public abstract class Enemy extends Actor {
         }
     }
 
-    protected abstract int setDefaultTurnsToMove();
+    protected abstract int getDefaultTurnsToMove();
 
     @Override
     public String getTileName() {

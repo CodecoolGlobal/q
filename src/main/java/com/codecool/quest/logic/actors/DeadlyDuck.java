@@ -29,7 +29,7 @@ public class DeadlyDuck extends Enemy {
 
     }
 
-    protected int setDefaultTurnsToMove() {
+    protected int getDefaultTurnsToMove() {
         return DEFAULT_TURNS_TO_MOVE;
     }
 

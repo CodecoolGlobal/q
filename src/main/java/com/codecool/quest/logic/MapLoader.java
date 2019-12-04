@@ -58,6 +58,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new DeadlyDuck(cell);
                             break;
+                        case 'f':
+                            cell.setType(CellType.FLOOR);
+                            new Cow(cell);
+                            break;
                         case 'm':
                             cell.setType(CellType.FLOOR);
                             new Mushroom(cell);

@@ -29,7 +29,7 @@ public class Skeleton extends Enemy {
 
     public void setDefaultEnemyHealth(Cell nextCell){}
 
-    protected int setDefaultTurnsToMove() {
+    protected int getDefaultTurnsToMove() {
         return DEFAULT_TURNS_TO_MOVE;
     }
 
