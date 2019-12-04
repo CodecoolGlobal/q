@@ -36,19 +36,14 @@ public class Player extends Actor {
     }
 
 
-    @Override
     public void attack(Actor target, Cell cell) {
         if (inventory.isItemInInventory("Sword")) {
             damage += 3;
         }
         target.health = target.health - damage;
-
-        target.defend(this, cell);
+        ((Enemy) target).defend(this, cell);
         this.enemyHealth = target.getHealth();
-    }
 
-    @Override
-    public void defend(Actor attacker, Cell cell) {
     }
 
     public void move(int dx, int dy) {

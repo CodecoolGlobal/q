@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap(List<Actor> enemys) {
+    public static GameMap loadMap() {
         InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
@@ -52,8 +52,7 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            Skeleton newSkeleton = new Skeleton(cell);
-                            enemys.add(newSkeleton);
+                            new Skeleton(cell);
                             break;
                         case 'm':
                             cell.setType(CellType.FLOOR);

@@ -6,19 +6,17 @@ import java.util.TimerTask;
 public class EnemyMove extends TimerTask {
 
     private final Runnable refresh;
-    private List<Actor> enemies;
-    public EnemyMove(List<Actor> enemies, Runnable refresh) {
+    private List<Enemy> enemies;
+    public EnemyMove(List<Enemy> enemies, Runnable refresh) {
         this.enemies = enemies;
         this.refresh = refresh;
 
     }
 
     public void run() {
-        for (Actor enemy : enemies){
+        for (Enemy enemy : enemies){
             enemy.generateMove();
         }
         refresh.run();
     }
-
-    public void generateMove(){}
 }

@@ -2,28 +2,35 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public abstract class Enemy extends Actor {
     private static final Random RANDOM_DIRECTION = new Random();
     protected int turnsToMove;
     protected int defenseDamage;
+    protected static List<Enemy> enemies = new ArrayList<Enemy>();
 
     public Enemy(Cell cell) {
         super(cell);
+        enemies.add(this);
     }
 
-    @Override
-    public void attack(Actor target, Cell cell) {
-
+    public static List<Enemy> getEnemies() {
+        return enemies;
     }
 
-    @Override
-    public void defend(Actor attacker, Cell cell) {
 
+    public abstract void attack(Actor target, Cell cell);
+
+    public abstract void defend(Actor attacker, Cell cell);
+
+    public boolean isEnemyDead() {
+        return this.health < 1;
     }
 
-    @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
 

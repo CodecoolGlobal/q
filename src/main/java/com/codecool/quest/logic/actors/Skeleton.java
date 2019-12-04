@@ -27,18 +27,17 @@ public class Skeleton extends Enemy {
         this.tileName = newTileName;
     }
 
-    @Override
     public void attack(Actor target, Cell cell) {
         if (target instanceof Player) {
             target.health = target.health - damage;
         }
     }
 
-    @Override
     public void defend(Actor attacker, Cell cell) {
-        if (this.health < 1) {
+        if (this.isEnemyDead()) {
             this.health = 0;
             cell.setActor(null);
+            enemies.remove(this);
         } else {
             attacker.health = attacker.health - defenseDamage;
         }

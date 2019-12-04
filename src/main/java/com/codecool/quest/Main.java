@@ -4,6 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.actors.Enemy;
 import com.codecool.quest.logic.items.Item;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,8 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main extends Application {
-    private List<Actor> enemies = new ArrayList<Actor>();
-    GameMap map = MapLoader.loadMap(enemies);
+    GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
@@ -111,7 +111,7 @@ public class Main extends Application {
     }
 
     private void stepGame() {
-        enemies.forEach(actor -> actor.generateMove());
+        Enemy.getEnemies().forEach(Enemy::generateMove);
         map.getPlayer().generateMove();
         refresh();
     }
@@ -140,6 +140,7 @@ public class Main extends Application {
         healthLabel.setText("" + map.getPlayer().getHealth());
         enemyHealthLabel.setText("" + map.getPlayer().getEnemyHealth());
         listView.getItems().clear();
+
         for (Map.Entry<String, Integer> entry : map.getPlayer().getInventory().getPlayerInventory().entrySet()) {
             listView.getItems().add(entry.getKey() + " : " + entry.getValue());
         }

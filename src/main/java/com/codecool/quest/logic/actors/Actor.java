@@ -55,8 +55,6 @@ public abstract class Actor implements Drawable {
 
     public abstract void attack(Actor target, Cell cell);
 
-    public abstract void defend(Actor attacker, Cell cell);
-
     public abstract void move(int dx, int dy);
 
     protected boolean canOpenDoor(Cell nextCell) {
