@@ -7,6 +7,7 @@ import java.util.Random;
 public abstract class Enemy extends Actor {
     private static final Random RANDOM_DIRECTION = new Random();
     protected int turnsToMove;
+    protected int defenseDamage;
 
     public Enemy(Cell cell) {
         super(cell);

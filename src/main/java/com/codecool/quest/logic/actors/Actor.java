@@ -10,6 +10,7 @@ public abstract class Actor implements Drawable {
     protected int health = 10;
     protected Inventory inventory = new Inventory();
     protected int maxDistance;
+    protected int damage;
 
     public Actor(Cell cell) {
         this.cell = cell;

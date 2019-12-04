@@ -14,6 +14,8 @@ public class Skeleton extends Enemy {
         this.health = 6;
         this.turnsToMove = 60;
         this.maxDistance = 2;
+        this.damage = 3;
+        this.defenseDamage = 2;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class Skeleton extends Enemy {
     @Override
     public void attack(Actor target, Cell cell) {
         if (target instanceof Player) {
-            target.health = target.health - 3;
+            target.health = target.health - damage;
         }
     }
 
@@ -38,7 +40,7 @@ public class Skeleton extends Enemy {
             this.health = 0;
             cell.setActor(null);
         } else {
-            attacker.health = attacker.health - 2;
+            attacker.health = attacker.health - defenseDamage;
         }
     }
 

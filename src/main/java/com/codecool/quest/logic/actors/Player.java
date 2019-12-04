@@ -15,10 +15,11 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         this.maxDistance = 1;
+        this.damage = 5;
     }
 
     public void acquireItem(Item item) {
-        if(item.getItemName().equals("Sword")){
+        if (item.getItemName().equals("Sword")) {
             this.setTileName("playerWithSword");
         }
         this.inventory.addItem(item);
@@ -37,18 +38,17 @@ public class Player extends Actor {
 
     @Override
     public void attack(Actor target, Cell cell) {
-        if(inventory.isItemInInventory("Sword")){
-            target.health = target.health - 8;
-        } else {
-            target.health = target.health - 5;
+        if (inventory.isItemInInventory("Sword")) {
+            damage += 3;
         }
+        target.health = target.health - damage;
 
         target.defend(this, cell);
         this.enemyHealth = target.getHealth();
     }
 
     @Override
-    public void defend(Actor attacker,Cell cell) {
+    public void defend(Actor attacker, Cell cell) {
     }
 
     public void move(int dx, int dy) {
@@ -90,8 +90,8 @@ public class Player extends Actor {
         }
     }
 
-    public void generateMove(){
-        if (keyCode == null){
+    public void generateMove() {
+        if (keyCode == null) {
             return;
         }
         switch (keyCode) {
