@@ -1,13 +1,9 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.*;
-import com.codecool.quest.logic.items.Door;
-import com.codecool.quest.logic.items.Key;
-import com.codecool.quest.logic.items.Mushroom;
-import com.codecool.quest.logic.items.Sword;
+import com.codecool.quest.logic.items.*;
 
 import java.io.InputStream;
-import java.util.List;
 import java.util.Scanner;
 
 public class MapLoader {
@@ -77,6 +73,10 @@ public class MapLoader {
                         case 'd':
                             cell.setType(CellType.FLOOR);
                             new Door(cell);
+                            break;
+                        case 'p':
+                            cell.setType(CellType.FLOOR);
+                            new AntiShroomPotion(cell);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

@@ -36,8 +36,6 @@ public class Player extends Actor {
     }
 
 
-
-
     public void attack(Actor target, Cell cell) {
         if (inventory.isItemInInventory("Sword")) {
             damage += 3;
@@ -50,6 +48,7 @@ public class Player extends Actor {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
+
 
         if (canOpenDoor(nextCell)) {
 
@@ -90,7 +89,10 @@ public class Player extends Actor {
 
     public void generateMove() {
         int newMaxDistance;
-        if(isShroomed()){
+        if (gotAntiShroomPotion()) {
+            getSober();
+        }
+        if (isShroomed()) {
             this.setTileName("shroomedPlayer");
             newMaxDistance = -(maxDistance);
         } else {
@@ -130,6 +132,17 @@ public class Player extends Actor {
 
     private boolean gotKey() {
         return this.inventory.getPlayerInventory().containsKey("Key");
+
+    }
+
+    private boolean gotAntiShroomPotion() {
+        return this.inventory.getPlayerInventory().containsKey("AntiShroomPotion");
+    }
+
+
+    private void getSober() {
+        this.setTileName("player");
+        this.inventory.getPlayerInventory().remove("Mushroom");
 
     }
 
