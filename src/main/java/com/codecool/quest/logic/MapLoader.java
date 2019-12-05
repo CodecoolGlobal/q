@@ -62,6 +62,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Mushroom(cell);
                             break;
+                        case '+':
+                            cell.setType(CellType.FLOOR);
+                            new Milka(cell);
+                            break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
                             new Sword(cell);

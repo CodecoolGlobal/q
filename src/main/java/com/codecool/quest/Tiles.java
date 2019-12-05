@@ -45,6 +45,7 @@ public class Tiles {
         tileMap.put("grave", new Tile(1, 14));
         tileMap.put("sword", new Tile(0, 30));
         tileMap.put("antiShroomPotion", new Tile(17, 25));
+        tileMap.put("milka", new Tile(9, 16));
     }
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
         Tile tile = tileMap.get(d.getTileName());

@@ -3,6 +3,7 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Door;
 import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Milka;
 import javafx.scene.input.KeyCode;
 
 
@@ -22,9 +23,15 @@ public class Player extends Actor {
         if (item.getItemName().equals("Sword")) {
             this.setTileName("playerWithSword");
         }
-        this.inventory.addItem(item);
-        this.cell.setItem(null);
 
+        if (item instanceof Milka){
+            this.health += 4;
+        } else {
+
+            this.inventory.addItem(item);
+
+        }
+        this.cell.setItem(null);
     }
 
     public String getTileName() {

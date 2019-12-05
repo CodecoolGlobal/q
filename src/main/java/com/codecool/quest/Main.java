@@ -6,6 +6,7 @@ import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Enemy;
 import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Milka;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;

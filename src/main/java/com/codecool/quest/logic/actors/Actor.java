@@ -62,7 +62,7 @@ public abstract class Actor implements Drawable {
     }
 
     protected boolean emptyCell(Cell nextCell) {
-        return nextCell.getActor() == null && !(nextCell.getItem() instanceof Door);
+        return nextCell.getActor() == null && nextCell.getItem() == null;
     }
 
     protected boolean notWall(Cell nextCell) {
@@ -72,6 +72,7 @@ public abstract class Actor implements Drawable {
     protected boolean notDoor(Cell nextCell) {
         return !(nextCell.getItem() instanceof Door);
     }
+
 
     protected abstract void setDefaultEnemyHealth(Cell nextCell);
 

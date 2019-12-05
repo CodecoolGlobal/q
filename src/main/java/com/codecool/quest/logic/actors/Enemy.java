@@ -1,6 +1,8 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.items.Door;
+import com.codecool.quest.logic.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +27,18 @@ public abstract class Enemy extends Actor {
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
 
-        if (emptyCell(nextCell)) {
-            if (notWall(nextCell)) {
+        if ((emptyCell(nextCell))) {
+                if (notWall(nextCell)) {
 
-                this.setDefaultEnemyHealth(nextCell);
-                makeMove(nextCell);
-                cell = nextCell;
-            }
+                    this.setDefaultEnemyHealth(nextCell);
+                    makeMove(nextCell);
+                    cell = nextCell;
+                }
 
         } else if (isPlayer(nextCell)) {
             this.attack(nextCell.getActor(), nextCell);
 
-        } else if (!(isEnemy(nextCell))) {
+        } else if (!(isEnemy(nextCell)) && !(isItem(nextCell))) {
 
             this.setDefaultEnemyHealth(nextCell);
             makeMove(nextCell);
@@ -92,5 +94,9 @@ public abstract class Enemy extends Actor {
     @Override
     public String getTileName() {
         return null;
+    }
+
+    public boolean isItem(Cell nextCell){
+        return !(nextCell.getItem() instanceof Door);
     }
 }
