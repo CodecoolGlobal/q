@@ -1,0 +1,21 @@
+25 20
+#############ccabaclaclbc
+#....+......#cabl########
+#...s...s...######......#
+#.sssss......dsd...+..#
+#..k....p...######......#
+#..sds..ssss#bbla#......#
+#..m....sss.#abcl#......#
+#........m..#cbaa#......#
+#####..######aacb###..###
+baca#..#bcaaccaccbl#..#la
+abcl#..#cablbbclaab#..#bc
+cbab#..#cbaaalbaac##..##l
+al###..####bcaacb#......#
+cb#..@.w..#cllcaa#......#
+ll#.u..f..#abbbac#......#
+bc#....u..#blclab#......#
+al#.u.w...#abclab#......#
+bc#.u.u.u.#ccllac#......#
+ll#.u...u.#babbal#...g..#
+la#########bacalab###.##l
