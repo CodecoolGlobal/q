@@ -53,52 +53,6 @@ public class Player extends Actor {
         target.health = target.health - damage;
         ((Enemy) target).defend(this, cell);
         this.enemyHealth = target.getHealth();
-
-    }
-
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-
-        if(isGate(nextCell)){
-            Main.map = MapLoader.loadMap(1);
-
-        }
-
-        if (canOpenDoor(nextCell)) {
-
-            this.setDefaultEnemyHealth(nextCell);
-            makeMove(nextCell);
-            ((Door) nextCell.getItem()).setDoorStatus();
-
-
-        } else if (isEnemy(nextCell)) {
-            this.attack(nextCell.getActor(), nextCell);
-
-        } else if (emptyCell(nextCell)) {
-            if (notWall(nextCell) || hasCheatCode()) {
-
-                this.setDefaultEnemyHealth(nextCell);
-                makeMove(nextCell);
-                cell = nextCell;
-            }
-
-        } else if (!(isEnemy(nextCell)) && notDoor(nextCell)) {
-
-            this.setDefaultEnemyHealth(nextCell);
-            makeMove(nextCell);
-        }
-    }
-
-    public int getEnemyHealth() {
-        return this.enemyHealth;
-    }
-
-    public void setDefaultEnemyHealth(Cell neighbour) {
-        if (neighbour.getActor() != null) {
-            this.enemyHealth = neighbour.getActor().health;
-        } else {
-            this.enemyHealth = 0;
-        }
     }
 
     public void generateMove() {
@@ -135,10 +89,40 @@ public class Player extends Actor {
         keyCode = null;
     }
 
-    public void setLastKeyPressed(KeyCode code) {
-        this.keyCode = code;
+    public void move(int dx, int dy) {
+        Cell nextCell = cell.getNeighbor(dx, dy);
+
+        if(isGate(nextCell)){
+            Main.map = MapLoader.loadMap(1);
+
+        }
+        if (canOpenDoor(nextCell)) {
+            this.setDefaultEnemyHealth(nextCell);
+            makeMove(nextCell);
+            ((Door) nextCell.getItem()).setDoorStatus();
+
+        } else if (isEnemy(nextCell)) {
+            this.attack(nextCell.getActor(), nextCell);
+
+        } else if (emptyCell(nextCell)) {
+            if (notWall(nextCell) || hasCheatCode()) {
+
+                this.setDefaultEnemyHealth(nextCell);
+                makeMove(nextCell);
+                cell = nextCell;
+            }
+
+        } else if (!(isEnemy(nextCell)) && notDoor(nextCell)) {
+
+            this.setDefaultEnemyHealth(nextCell);
+            makeMove(nextCell);
+        }
     }
 
+
+    private boolean isGate(Cell nextCell){
+        return nextCell.getItem() instanceof Gate;
+    }
 
     private boolean isShroomed() {
         return this.inventory.getPlayerInventory().containsKey("Mushroom");
@@ -146,7 +130,6 @@ public class Player extends Actor {
 
     private boolean gotKey() {
         return this.inventory.getPlayerInventory().containsKey("Key");
-
     }
 
     private boolean gotAntiShroomPotion() {
@@ -156,7 +139,6 @@ public class Player extends Actor {
     private void getSober() {
         this.setTileName("player");
         this.inventory.getPlayerInventory().remove("Mushroom");
-
     }
 
     private boolean hasCheatCode() {
@@ -176,6 +158,9 @@ public class Player extends Actor {
         return tileName;
     }
 
+    public int getEnemyHealth() {
+        return this.enemyHealth;
+    }
 
 
     public void setName(String name) {
@@ -185,10 +170,16 @@ public class Player extends Actor {
     private void setTileName(String newTileName) {
         this.tileName = newTileName;
     }
-    public boolean isGate(Cell nextCell){
-        return nextCell.getItem() instanceof Gate;
+
+    public void setDefaultEnemyHealth(Cell neighbour) {
+        if (neighbour.getActor() != null) {
+            this.enemyHealth = neighbour.getActor().health;
+        } else {
+            this.enemyHealth = 0;
+        }
     }
 
-
-
+    public void setLastKeyPressed(KeyCode code) {
+        this.keyCode = code;
+    }
 }

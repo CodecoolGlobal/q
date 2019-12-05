@@ -1,7 +1,6 @@
 package com.codecool.quest.logic.items;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.actors.Actor;
 
 public class Door extends Item {
     public Door(Cell cell) { super(cell); }
@@ -12,7 +11,6 @@ public class Door extends Item {
         if (this.isOpen){
             return "openDoor";
         }
-
         return "closedDoor";
     }
 

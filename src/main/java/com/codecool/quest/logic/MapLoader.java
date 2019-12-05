@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MapLoader {
-    private static final List<String> LEVELS = new ArrayList<String>() {
+    private static final List<String> LEVELS = new ArrayList<>() {
         {
             add("/map1.txt");
             add("/map2.txt");
