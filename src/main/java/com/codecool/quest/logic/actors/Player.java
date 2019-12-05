@@ -176,9 +176,7 @@ public class Player extends Actor {
         return tileName;
     }
 
-    public int getEnemyHealth() {
-        return this.enemyHealth;
-    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -192,15 +190,5 @@ public class Player extends Actor {
     }
 
 
-    public void setDefaultEnemyHealth(Cell neighbour) {
-        if (neighbour.getActor() != null) {
-            this.enemyHealth = neighbour.getActor().health;
-        } else {
-            this.enemyHealth = 0;
-        }
-    }
 
-    public void setLastKeyPressed(KeyCode code) {
-        this.keyCode = code;
-    }
 }
