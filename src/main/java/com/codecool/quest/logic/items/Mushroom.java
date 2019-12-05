@@ -7,9 +7,18 @@ public class Mushroom extends Item {
     public Mushroom(Cell cell) {
         super(cell);
     }
+    private boolean mushrooming = false;
 
     @Override
     public String getTileName() {
-        return "mushroom";
+        if (this.mushrooming) {
+            return "shroomed";
+        }
+        return "doomed";
     }
+
+    public void setMushrooming(){
+        this.mushrooming = true;
+    }
+
 }
