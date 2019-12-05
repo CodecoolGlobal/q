@@ -17,31 +17,9 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
+    public abstract void generateMove();
 
-    public int getHealth() {
-        return health;
-    }
-
-    public Cell getCell() {
-        return cell;
-    }
-
-    public int getX() {
-        return cell.getX();
-    }
-
-    public int getY() {
-        return cell.getY();
-    }
-
-    public String getActorName() {
-        return this.getClass().getName();
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
+    public abstract void move(int dx, int dy);
 
     public void makeMove(Cell nextCell) {
         cell.setActor(null);
@@ -49,9 +27,6 @@ public abstract class Actor implements Drawable {
         cell = nextCell;
     }
 
-    public abstract void attack(Actor target, Cell cell);
-
-    public abstract void move(int dx, int dy);
 
     protected boolean isEnemy(Cell nextCell) {
         return (nextCell.getActor() instanceof Enemy);
@@ -74,8 +49,27 @@ public abstract class Actor implements Drawable {
     }
 
 
+    public int getHealth() {
+        return health;
+    }
+
+    public Cell getCell() {
+        return cell;
+    }
+
+    public int getX() {
+        return cell.getX();
+    }
+
+    public int getY() {
+        return cell.getY();
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     protected abstract void setDefaultEnemyHealth(Cell nextCell);
 
-    public abstract void generateMove();
 
 }
