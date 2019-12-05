@@ -4,14 +4,14 @@ import com.codecool.quest.logic.Cell;
 
 public class Cow extends Enemy {
     String tileName = "cow";
-    private static final int DEFAULT_TURNS_TO_MOVE = 60;
+    private static final int DEFAULT_TURNS_TO_MOVE = 900000000;
 
 
     public Cow(Cell cell) {
         super(cell);
         this.health = 15;
         this.turnsToMove = DEFAULT_TURNS_TO_MOVE;
-        this.maxDistance = 0;
+        this.maxDistance = 1;
         this.damage = 8;
         this.defenseDamage = 5;
 
@@ -31,6 +31,10 @@ public class Cow extends Enemy {
     public void move(int dx, int dy) {
     }
 
+    @Override
+    public void generateMove(){
+
+    }
 
     protected int getDefaultTurnsToMove() {
         return DEFAULT_TURNS_TO_MOVE;
