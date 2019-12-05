@@ -15,7 +15,6 @@ public class DeadlyDuck extends Enemy {
         this.defenseDamage = 3;
     }
 
-    @Override
     public String getTileName() {
         return tileName;
     }

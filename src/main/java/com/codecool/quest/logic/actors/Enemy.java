@@ -3,6 +3,7 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Door;
 import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Milka;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,12 @@ public abstract class Enemy extends Actor {
         Cell nextCell = cell.getNeighbor(dx, dy);
 
         if ((emptyCell(nextCell))) {
-                if (notWall(nextCell)) {
+            if (notWall(nextCell)) {
 
-                    this.setDefaultEnemyHealth(nextCell);
-                    makeMove(nextCell);
-                    cell = nextCell;
-                }
+                this.setDefaultEnemyHealth(nextCell);
+                makeMove(nextCell);
+                cell = nextCell;
+            }
 
         } else if (isPlayer(nextCell)) {
             this.attack(nextCell.getActor(), nextCell);
@@ -70,7 +71,8 @@ public abstract class Enemy extends Actor {
             this.move(newStepSize, 0);
         } else {
             this.move(0, newStepSize);
-        };
+        }
+        ;
     }
 
     public void attack(Actor target, Cell cell) {
@@ -81,9 +83,13 @@ public abstract class Enemy extends Actor {
 
     public void defend(Actor attacker, Cell cell) {
         if (this.isEnemyDead()) {
-            this.health = 0;
             cell.setActor(null);
+            this.health = 0;
             enemies.remove(this);
+
+            if (this instanceof Cow)
+                cell.setItem(new Milka(cell));
+
         } else {
             attacker.health = attacker.health - this.defenseDamage;
         }
@@ -96,7 +102,7 @@ public abstract class Enemy extends Actor {
         return null;
     }
 
-    public boolean isItem(Cell nextCell){
+    public boolean isItem(Cell nextCell) {
         return !(nextCell.getItem() instanceof Door);
     }
 }

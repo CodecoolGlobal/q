@@ -18,7 +18,6 @@ public class Skeleton extends Enemy {
         this.defenseDamage = 2;
     }
 
-    @Override
     public String getTileName() {
         return tileName;
     }
