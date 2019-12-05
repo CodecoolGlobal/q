@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap();
+    public static GameMap map = MapLoader.loadMap(0);
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);

@@ -41,7 +41,7 @@ public class Tiles {
         tileMap.put("bullSkull", new Tile(1, 15));
         tileMap.put("campFire", new Tile(14, 10));
         tileMap.put("loath", new Tile(6, 2));
-        tileMap.put("hellGate", new Tile(21, 11));
+        tileMap.put("gate", new Tile(21, 11));
         tileMap.put("grave", new Tile(1, 14));
         tileMap.put("sword", new Tile(0, 30));
         tileMap.put("antiShroomPotion", new Tile(17, 25));

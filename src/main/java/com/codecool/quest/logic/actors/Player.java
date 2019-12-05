@@ -1,7 +1,10 @@
 package com.codecool.quest.logic.actors;
 
+import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.items.Door;
+import com.codecool.quest.logic.items.Gate;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Milka;
 import javafx.scene.SnapshotResult;
@@ -68,6 +71,11 @@ public class Player extends Actor {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
+
+        if(isGate(nextCell)){
+            Main.map = MapLoader.loadMap(1);
+
+        }
 
         if (canOpenDoor(nextCell)) {
 
@@ -179,6 +187,10 @@ public class Player extends Actor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isGate(Cell nextCell){
+        return nextCell.getItem() instanceof Gate;
     }
 
 

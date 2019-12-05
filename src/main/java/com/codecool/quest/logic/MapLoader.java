@@ -4,11 +4,20 @@ import com.codecool.quest.logic.actors.*;
 import com.codecool.quest.logic.items.*;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+    private static final List<String> LEVELS = new ArrayList<String>() {
+        {
+            add("/map1.txt");
+            add("/map2.txt");
+        }
+    };
+
+    public static GameMap loadMap( int level) {
+        InputStream is = MapLoader.class.getResourceAsStream(LEVELS.get(level));
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -43,8 +52,9 @@ public class MapLoader {
                         case 'l':
                             cell.setType(CellType.LOATH);
                             break;
-                        case 'h':
-                            cell.setType(CellType.HELLGATE);
+                        case 'g':
+                            cell.setType(CellType.FLOOR);
+                            new Gate(cell);
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
@@ -57,10 +67,6 @@ public class MapLoader {
                         case 'f':
                             cell.setType(CellType.FLOOR);
                             new Cow(cell);
-                            break;
-                        case 'm':
-                            cell.setType(CellType.FLOOR);
-                            new Mushroom(cell);
                             break;
                         case '+':
                             cell.setType(CellType.FLOOR);
@@ -77,6 +83,10 @@ public class MapLoader {
                         case 'd':
                             cell.setType(CellType.FLOOR);
                             new Door(cell);
+                            break;
+                        case 'm':
+                            cell.setType(CellType.FLOOR);
+                            new Mushroom(cell);
                             break;
                         case 'p':
                             cell.setType(CellType.FLOOR);
