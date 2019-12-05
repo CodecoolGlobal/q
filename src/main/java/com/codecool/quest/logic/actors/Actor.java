@@ -42,10 +42,6 @@ public abstract class Actor implements Drawable {
         return inventory;
     }
 
-    public boolean gotKey() {
-        return this.inventory.getPlayerInventory().containsKey("Key");
-
-    }
 
     public void makeMove(Cell nextCell) {
         cell.setActor(null);
@@ -56,10 +52,6 @@ public abstract class Actor implements Drawable {
     public abstract void attack(Actor target, Cell cell);
 
     public abstract void move(int dx, int dy);
-
-    protected boolean canOpenDoor(Cell nextCell) {
-        return nextCell.getItem() instanceof Door && this.gotKey();
-    }
 
     protected boolean isEnemy(Cell nextCell) {
         return (nextCell.getActor() instanceof Enemy);

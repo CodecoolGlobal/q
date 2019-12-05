@@ -36,6 +36,8 @@ public class Player extends Actor {
     }
 
 
+
+
     public void attack(Actor target, Cell cell) {
         if (inventory.isItemInInventory("Sword")) {
             damage += 3;
@@ -54,6 +56,7 @@ public class Player extends Actor {
             this.setDefaultEnemyHealth(nextCell);
             makeMove(nextCell);
             ((Door) nextCell.getItem()).setDoorStatus();
+
 
         } else if (isEnemy(nextCell)) {
             this.attack(nextCell.getActor(), nextCell);
@@ -86,21 +89,28 @@ public class Player extends Actor {
     }
 
     public void generateMove() {
+        int newMaxDistance;
+        if(isShroomed()){
+            this.setTileName("shroomedPlayer");
+            newMaxDistance = -(maxDistance);
+        } else {
+            newMaxDistance = maxDistance;
+        }
         if (keyCode == null) {
             return;
         }
         switch (keyCode) {
             case W:
-                this.move(0, -maxDistance);
+                this.move(0, -newMaxDistance);
                 break;
             case S:
-                this.move(0, maxDistance);
+                this.move(0, newMaxDistance);
                 break;
             case A:
-                this.move(-maxDistance, 0);
+                this.move(-newMaxDistance, 0);
                 break;
             case D:
-                this.move(maxDistance, 0);
+                this.move(newMaxDistance, 0);
                 break;
             case P:
                 //this.acquireItem(getCurrentItem()); todo
@@ -112,4 +122,19 @@ public class Player extends Actor {
     public void setLastKeyPressed(KeyCode code) {
         this.keyCode = code;
     }
+
+    public boolean isShroomed() {
+        return this.inventory.getPlayerInventory().containsKey("Mushroom");
+
+    }
+
+    private boolean gotKey() {
+        return this.inventory.getPlayerInventory().containsKey("Key");
+
+    }
+
+    private boolean canOpenDoor(Cell nextCell) {
+        return nextCell.getItem() instanceof Door && this.gotKey();
+    }
+
 }
