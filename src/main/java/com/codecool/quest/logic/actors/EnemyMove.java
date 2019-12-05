@@ -7,6 +7,7 @@ public class EnemyMove extends TimerTask {
 
     private final Runnable refresh;
     private List<Enemy> enemies;
+
     public EnemyMove(List<Enemy> enemies, Runnable refresh) {
         this.enemies = enemies;
         this.refresh = refresh;

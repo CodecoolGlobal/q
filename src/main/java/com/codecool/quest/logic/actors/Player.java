@@ -4,9 +4,8 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Door;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Milka;
-import javafx.scene.SnapshotResult;
-import javafx.scene.input.KeyCode;
 
+import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +15,13 @@ public class Player extends Actor {
     private String tileName = "player";
     private KeyCode keyCode;
     private String name;
-    private static final List<String> DEVELOPER_NAMES = new ArrayList<String>() {
+    private static final List<String> DEVELOPER_NAMES = new ArrayList<>() {
         {
             add("Peti");
             add("Miki");
             add("Avril");
         }
     };
-
 
     public Player(Cell cell) {
         super(cell);
@@ -36,74 +34,22 @@ public class Player extends Actor {
         if (item.getItemName().equals("Sword")) {
             this.setTileName("playerWithSword");
         }
-
         if (item instanceof Milka) {
             this.health += 4;
+
         } else {
-
             this.inventory.addItem(item);
-
         }
         this.cell.setItem(null);
     }
 
-    public String getTileName() {
-        return tileName;
-    }
-
-    private void setTileName(String newTileName) {
-        this.tileName = newTileName;
-    }
-
-
-    public void attack(Actor target, Cell cell) {
+    private void attack(Actor target, Cell cell) {
         if (inventory.isItemInInventory("Sword")) {
             damage += 3;
         }
         target.health = target.health - damage;
         ((Enemy) target).defend(this, cell);
         this.enemyHealth = target.getHealth();
-
-    }
-
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-
-        if (canOpenDoor(nextCell)) {
-
-            this.setDefaultEnemyHealth(nextCell);
-            makeMove(nextCell);
-            ((Door) nextCell.getItem()).setDoorStatus();
-
-
-        } else if (isEnemy(nextCell)) {
-            this.attack(nextCell.getActor(), nextCell);
-
-        } else if (emptyCell(nextCell)) {
-            if (notWall(nextCell) || hasCheatCode()) {
-
-                this.setDefaultEnemyHealth(nextCell);
-                makeMove(nextCell);
-                cell = nextCell;
-            }
-
-        } else if (!(isEnemy(nextCell)) && notDoor(nextCell)) {
-
-            this.setDefaultEnemyHealth(nextCell);
-            makeMove(nextCell);
-        }
-    }
-
-    public int getEnemyHealth() {
-        return this.enemyHealth;
-    }
-
-    public void setDefaultEnemyHealth(Cell neighbour) {
-        if (neighbour.getActor() != null) {
-            this.enemyHealth = neighbour.getActor().health;
-        } else {
-            this.enemyHealth = 0;
-        }
     }
 
     public void generateMove() {
@@ -140,13 +86,34 @@ public class Player extends Actor {
         keyCode = null;
     }
 
-    public void setLastKeyPressed(KeyCode code) {
-        this.keyCode = code;
+    public void move(int dx, int dy) {
+        Cell nextCell = cell.getNeighbor(dx, dy);
+
+        if (canOpenDoor(nextCell)) {
+
+            this.setDefaultEnemyHealth(nextCell);
+            makeMove(nextCell);
+            ((Door) nextCell.getItem()).setDoorStatus();
+
+        } else if (isEnemy(nextCell)) {
+            this.attack(nextCell.getActor(), nextCell);
+
+        } else if (emptyCell(nextCell)) {
+
+            if (notWall(nextCell) || hasCheatCode()) {
+                this.setDefaultEnemyHealth(nextCell);
+                makeMove(nextCell);
+                cell = nextCell;
+            }
+        } else if (!(isEnemy(nextCell)) && notDoor(nextCell)) {
+            this.setDefaultEnemyHealth(nextCell);
+            makeMove(nextCell);
+        }
     }
 
-    public boolean isShroomed() {
-        return this.inventory.getPlayerInventory().containsKey("Mushroom");
 
+    private boolean isShroomed() {
+        return this.inventory.getPlayerInventory().containsKey("Mushroom");
     }
 
     private boolean gotKey() {
@@ -158,14 +125,13 @@ public class Player extends Actor {
         return this.inventory.getPlayerInventory().containsKey("AntiShroomPotion");
     }
 
-
     private void getSober() {
         this.setTileName("player");
         this.inventory.getPlayerInventory().remove("Mushroom");
 
     }
 
-    public boolean hasCheatCode() {
+    private boolean hasCheatCode() {
         return DEVELOPER_NAMES.contains(this.name);
     }
 
@@ -173,13 +139,36 @@ public class Player extends Actor {
         return nextCell.getItem() instanceof Door && this.gotKey();
     }
 
+
     public String getName() {
         return name;
+    }
+
+    public String getTileName() {
+        return tileName;
+    }
+
+    public int getEnemyHealth() {
+        return this.enemyHealth;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    private void setTileName(String newTileName) {
+        this.tileName = newTileName;
+    }
 
+    public void setDefaultEnemyHealth(Cell neighbour) {
+        if (neighbour.getActor() != null) {
+            this.enemyHealth = neighbour.getActor().health;
+        } else {
+            this.enemyHealth = 0;
+        }
+    }
+
+    public void setLastKeyPressed(KeyCode code) {
+        this.keyCode = code;
+    }
 }

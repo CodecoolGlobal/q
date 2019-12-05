@@ -3,13 +3,12 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.Cell;
 
 public class Cow extends Enemy {
-    String tileName = "cow";
     private static final int DEFAULT_TURNS_TO_MOVE = 900000000;
-
 
     public Cow(Cell cell) {
         super(cell);
         this.health = 15;
+        this.tileName = "cow";
         this.turnsToMove = DEFAULT_TURNS_TO_MOVE;
         this.maxDistance = 1;
         this.damage = 8;
@@ -17,23 +16,11 @@ public class Cow extends Enemy {
 
     }
 
+    @Override
+    public void generateMove(){}
 
     public String getTileName() {
         return tileName;
-    }
-
-
-    public void setTileName(String newTileName) {
-        this.tileName = newTileName;
-    }
-
-
-    public void move(int dx, int dy) {
-    }
-
-    @Override
-    public void generateMove(){
-
     }
 
     protected int getDefaultTurnsToMove() {
