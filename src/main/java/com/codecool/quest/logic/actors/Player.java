@@ -4,19 +4,32 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Door;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Milka;
+import javafx.scene.SnapshotResult;
 import javafx.scene.input.KeyCode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Player extends Actor {
     private int enemyHealth = 0;
     private String tileName = "player";
     private KeyCode keyCode;
+    private String name;
+    private static final List<String> DEVELOPER_NAMES = new ArrayList<String>() {
+        {
+            add("Peti");
+            add("Miki");
+            add("Avril");
+        }
+    };
 
 
     public Player(Cell cell) {
         super(cell);
         this.maxDistance = 1;
         this.damage = 5;
+        this.name = "Axolotl";
     }
 
     public void acquireItem(Item item) {
@@ -24,7 +37,7 @@ public class Player extends Actor {
             this.setTileName("playerWithSword");
         }
 
-        if (item instanceof Milka){
+        if (item instanceof Milka) {
             this.health += 4;
         } else {
 
@@ -56,7 +69,6 @@ public class Player extends Actor {
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
 
-
         if (canOpenDoor(nextCell)) {
 
             this.setDefaultEnemyHealth(nextCell);
@@ -68,7 +80,7 @@ public class Player extends Actor {
             this.attack(nextCell.getActor(), nextCell);
 
         } else if (emptyCell(nextCell)) {
-            if (notWall(nextCell)) {
+            if (notWall(nextCell) || hasCheatCode()) {
 
                 this.setDefaultEnemyHealth(nextCell);
                 makeMove(nextCell);
@@ -153,8 +165,21 @@ public class Player extends Actor {
 
     }
 
+    public boolean hasCheatCode() {
+        return DEVELOPER_NAMES.contains(this.name);
+    }
+
     private boolean canOpenDoor(Cell nextCell) {
         return nextCell.getItem() instanceof Door && this.gotKey();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
 }

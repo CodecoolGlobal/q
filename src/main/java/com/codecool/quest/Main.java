@@ -5,6 +5,7 @@ import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Enemy;
+import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Milka;
 import javafx.animation.KeyFrame;
@@ -19,6 +20,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -28,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,10 +62,13 @@ public class Main extends Application {
         ui.setPadding(new Insets(10));
 
 
-        ui.add(new Label("Health: "), 0, 0);
-        ui.add(healthLabel, 1, 0);
-        ui.add(new Label("Current enemy Health: "), 0, 1);
-        ui.add(enemyHealthLabel, 1, 1);
+        ui.add(new Label("Name: "), 0, 0);
+        TextField textField = new TextField(map.getPlayer().getName());
+        ui.add(textField, 1, 0);
+        ui.add(new Label("Health: "), 0, 1);
+        ui.add(healthLabel, 1, 1);
+        ui.add(new Label("Current enemy Health: "), 0, 2);
+        ui.add(enemyHealthLabel, 1, 2);
         inventoryLabel = new Label("Inventory: ");
         Button pickUpButton = new Button("Pick up");
         inventorybox.getChildren().add(inventoryLabel);
@@ -94,7 +100,14 @@ public class Main extends Application {
         primaryStage.setTitle("Hell in a Cell");
         primaryStage.show();
         timeline.play();
+
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            map.getPlayer().setName(newValue);
+            System.out.println("textfield changed from " + oldValue + " to " + newValue);
+        });
     }
+
+
 
     private Timeline setup() {
         Timeline timer = new Timeline();
